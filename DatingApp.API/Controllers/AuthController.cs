@@ -48,7 +48,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto UserForLoginDto)
         {
-            throw new Exception("erro teste global");
+            
             //primeiro verificar se o usuário existe na base de dados
             var userFromRepo = await _repo.Login(UserForLoginDto.Username.ToLower(), UserForLoginDto.Password);
             
