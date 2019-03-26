@@ -1,24 +1,27 @@
 <div class="container mt-4">
+    <div class="row">
+        <h1>{{user.knowAs}}'s Profile</h1>
+    </div>
   <div class="row">
       <div class="col-sm-4">
             <div class="card">
-                <img  class="card-img-top img-thumbnail" src="{{user?.photoUrl}}" alt="{{user?.knowAs}}">
+                <img  class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knowAs}}">
                 <div class="card-body">
                     <div>
                         <strong>Location:</strong>
-                        <p>{{user?.city}}, {{user?.country}} </p>
+                        <p>{{user.city}}, {{user.country}} </p>
                     </div>
                     <div>
                         <strong>Age:</strong>
-                        <p>{{user?.age}}</p>
+                        <p>{{user.age}}</p>
                     </div>
                     <div>
                         <strong>Last Active:</strong>
-                        <p>{{user?.lastActive}}</p>
+                        <p>{{user.lastActive}}</p>
                     </div>
                     <div>
                         <strong>Member Since:</strong>
-                        <p>{{user?.created}}</p>
+                        <p>{{user.created}}</p>
                     </div>
                 </div>
             </div>
@@ -32,20 +35,20 @@
       <div class="col-sm-8">
         <div class="tab-panel"> 
             <tabset class="member-tabset">
-                <tab heading='About {{user?.knowAs}}'> 
+                <tab heading='About {{user.knowAs}}'> 
                         <h4>Description</h4>
-                        <p>{{user?.introduction}}</p>
+                        <p>{{user.introduction}}</p>
                         <h4>Looking For</h4>
-                        <p>{{user?.lookingFor}}</p>
+                        <p>{{user.lookingFor}}</p>
                 </tab>
                 <tab heading='Interests'>
                     <h4>Interests</h4>
-                    <p>{{user?.interests}}</p>
+                    <p>{{user.interests}}</p>
                 </tab>
                 <tab heading='Photos'>
-                    <p>Photos aqui no futuro</p>
+                    <ngx-gallery [options]='galleryOptions' [images]='galleryImages' ></ngx-gallery>
                 </tab>
-                <tab heading='Messa ges'>
+                <tab heading='Messages'>
                     <p>Mensagens aqui no futuro</p>
                 </tab>
             </tabset>
