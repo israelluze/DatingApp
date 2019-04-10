@@ -1,3 +1,4 @@
+import { ListsResolver } from './_resolvers/lists.resolver';
 import { AuthService } from './_services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -82,7 +83,8 @@ export function tokenGetter() {
       UserService,
       MemberDetailResolver,
       MemberListResolver,
-      MemberEditResolver
+      MemberEditResolver,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent
