@@ -79,6 +79,7 @@ sendLike(id:number, recipientId: number) {
 }
 
 getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
+
   const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
 
   let params = new HttpParams();
@@ -94,12 +95,16 @@ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
     .pipe(
       map(response => {
         paginatedResult.result = response.body;
-        if (response.headers.get('Pagination') != null) {
+        if (response.headers.get('Pagination') !== null) {
           paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
         }
         return paginatedResult;
       })
     )
+}
+
+getMessageThread(id: number, recipientId: number) {
+  return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
 }
 
 }

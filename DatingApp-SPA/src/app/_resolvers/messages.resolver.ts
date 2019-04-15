@@ -12,11 +12,12 @@ export class MessagesResolver implements Resolve<Message[]> {
     pageNumber = 1;
     pageSize = 10;
     messageContainer = 'Unread';
+
     constructor(private userServive: UserService, private authService: AuthService ,
                     private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
-        return this.userServive.getMessages(this.authService.decodedToken.nameid , this.pageNumber, 
+        return this.userServive.getMessages(this.authService.decodedToken.nameid , this.pageNumber,
                                                 this.pageSize, this.messageContainer)
         .pipe(
             catchError(error => {
