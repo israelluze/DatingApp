@@ -90,7 +90,14 @@ namespace DatingApp.API
           //     seeder.SeedUsers();
            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
            app.UseAuthentication();
-           app.UseMvc();
+           app.UseDefaultFiles(); //Configuração para utilizar arquivos padrões da página
+           app.UseStaticFiles(); //Diz para utilizar os arquivos staticos gerados pelo ng build 
+           app.UseMvc(routes => {
+               routes.MapSpaFallbackRoute(
+                   name: "spa-fallback",
+                   defaults: new {controller = "FallBack", action = "Index"}
+               );
+           });
         }
     }
 }
