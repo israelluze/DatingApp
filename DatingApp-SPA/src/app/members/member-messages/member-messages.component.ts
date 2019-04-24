@@ -3,6 +3,7 @@ import { AuthService } from './../../_services/auth.service';
 import { Message } from './../../_models/message';
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member-messages',
@@ -22,7 +23,17 @@ newMessage: any = {};
   }
 
   loadMessages() {
+    const currentUserId = +this.authService.decodedToken.nameid;
     this.userService.getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
+    .pipe(
+      tap(messages => {
+        for (let i = 0; i < messages.length; i++) {
+          if (messages[i].isRead === false && messages[i].recipientId === currentUserId) {
+              this.userService.markAsRead(currentUserId,messages[i].id);
+          }
+        }
+      })
+    )
       .subscribe(messages => {
         this.messages = messages;
       }, error => {
@@ -32,7 +43,7 @@ newMessage: any = {};
 
   sendMessage() {
     this.newMessage.recipientId = this.recipientId;
-    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
+    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)    
     .subscribe((message: Message) => {
       this.messages.unshift(message);
       this.newMessage.content = '';
